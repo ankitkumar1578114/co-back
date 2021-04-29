@@ -1,0 +1,21 @@
+{
+  "name": "co-back",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ankitkumar1578114/co-back",
+  "author": "Ankit Kumar Aditya Gupta",
+  "license": "MIT",
+  "scripts": {
+    "start": "node bin/server.js",
+    "dev": "nodemon bin/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.3",
+    "helmet": "^4.4.1",
+    "http-errors": "^1.8.0",
+    "mongoose": "^5.11.19",
+    "morgan": "^1.9.1"
+  }
+}
