@@ -1,6 +1,6 @@
-const { Schema, model } = require("mongoose");
+const { Schema, Model } = require("mongoose");
 
-const supplierSchema = new Schema({
+const costomerSchema = new Schema({
 	nameOfSupplier: {
 		type: String,
 		required: true,
@@ -20,15 +20,7 @@ const supplierSchema = new Schema({
         type: String,
 		required: false
     },
-    rate: {
-		type: Number,
-		required: true,
-	},
-    maxSupply:{
-        type: Number,
-		required: true,	     
-    }
     
 });
 
-module.exports = model("supplier", supplierSchema);
+module.exports = Model("costomer", supplierSchema);
