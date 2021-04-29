@@ -2,13 +2,14 @@ const router = require("express").Router();
 const medicine = require("../../models/medicine");
 
 router.get("/list/:medicine_name", (req, res) => {
-    const medicine_name = req.params.medicine_name;
+    const medicine_name = typeof req.params.medicine_name === 'string' ? req.params.medicine_name: "null";
 
     medicine.find({medicineName: medicine_name}).lean().exec()
                 .then(docs => {
                     console.log(`Recieved ${docs.length} medicines named ${medicine_name}`);
 
-                    return res.send(docs);
+                    res.setHeader("Content-Type", "application/json");
+                    return res.status(200).send(docs);
                 })
                 .catch(err => {
                     console.error("Medicine list", err);
