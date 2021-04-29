@@ -4,11 +4,10 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
 // const csurf = require("csurf");	// consider the cases where cors is required, and remove cors itself if not really required
-// const cparser = require("cookie-parser");
 const { join } = require("path");
 const rateLimit = require("express-rate-limit");
 require("dotenv").config();
-const app = express();
+const app = express().disable('x-powered-by');
 
 // Routes START
 const plasmaRouter = require("./routes/plasma");
@@ -83,7 +82,7 @@ app.use(morgan("dev"));
 // 	// httpOnly: true,
 // 	// secure: true,
 // }
-// app.use(cparser());
+app.use(cparser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

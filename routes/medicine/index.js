@@ -8,11 +8,13 @@ router.get("/list/:medicine_name", (req, res) => {
                 .then(docs => {
                     console.log(`Recieved ${docs.length} medicines named ${medicine_name}`);
 
-                    res.setHeader("Content-Type", "application/json");
+                    res.setHeader("Content-Type", "application/json;charset=utf-8");
                     return res.status(200).send(docs);
                 })
                 .catch(err => {
                     console.error("Medicine list", err);
+
+                    return res.sendStatus(500);
                 })
 })
 
