@@ -12,7 +12,7 @@ const app = express();
 
 // Routes START
 const plasmaRouter = require("./routes/plasma");
-const requestRouter = require("./routes/request");
+const hospitalRouter = require("./routes/hospital");
 // Routes END
 
 const mongoose = require("mongoose");
@@ -91,7 +91,6 @@ app.use('/', (req, res) => {
 	return res.send("Kaam kar raha hai");
 })
 app.use('plasma', plasmaRouter);
-app.use('request', requestRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));
