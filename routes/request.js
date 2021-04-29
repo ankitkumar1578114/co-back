@@ -30,7 +30,7 @@ router.delete('/remove/:req_id', (req, res) => {
 
 // new requester
 router.post('/new', (req, res) => {
-    const req = {
+    const new_request = {
         // todo: What fields should be here ?
         requesterName: req.body.name
     };

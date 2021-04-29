@@ -10,6 +10,11 @@ const rateLimit = require("express-rate-limit");
 require("dotenv").config();
 const app = express();
 
+// Routes START
+const plasmaRouter = require("./routes/plasma");
+const requestRouter = require("./routes/request");
+// Routes END
+
 const mongoose = require("mongoose");
 // the default database options for each new connection
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/";
@@ -82,10 +87,11 @@ app.use(express.urlencoded({ extended: false }));
 
 express.static(join(__dirname, "public"));
 
-
-app.use((req, res) => {
+app.use('/', (req, res) => {
 	return res.send("Kaam kar raha hai");
 })
+app.use('plasma', plasmaRouter);
+app.use('request', requestRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));
