@@ -9,8 +9,8 @@ const { join } = require("path");
 const rateLimit = require("express-rate-limit");
 require("dotenv").config();
 const app = express();
-
 const mongoose = require("mongoose");
+const supplier = require("./models/supplier");
 // the default database options for each new connection
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/";
 const dbOptions = {
@@ -83,11 +83,36 @@ app.use(express.urlencoded({ extended: false }));
 express.static(join(__dirname, "public"));
 
 
-app.use((req, res) => {
-	return res.send("Kaam kar raha hai");
-})
+// app.use((req, res) => {
+// 	return res.send("Kaam kar raha hai");
+// })
+app.get('/', function (req, res) {
+	return res.send("Home");
+  })
 
-// catch 404 and forward to error handler
+app.post('/insertSupplier', function (req, res) {
+	var obj = req.body.obj;
+	console.log(obj)
+	// {nameOfSupplier:"ankit Kumar",addressOfSupplier:"kabir Nagar",contact:"454",rate:45 ,maxSupply:45 }
+	const data= new supplier(obj)
+	data.save(function (err,data){
+		if(err) return res.send(err)
+		else{res.send("Success")}
+
+	})
+  })
+  app.get('/fetchSupplier', function (req, res) {
+	// {nameOfSupplier:"ankit Kumar",addressOfSupplier:"kabir Nagar",contact:"454",rate:45 ,maxSupply:45 }
+	supplier.find({}, function(err, result) {
+		if (err) {
+		  res.send(err)
+		} else {
+		  res.send(result);
+		}
+	  });	
+  })
+
+  // catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));
 
 // error handler
@@ -100,5 +125,4 @@ app.use((err, req, res, next) => {
 	// render the error page
 	res.sendStatus(err.status || 500);
 });
-
 module.exports = app;
