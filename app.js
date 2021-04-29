@@ -11,6 +11,7 @@ const app = express().disable('x-powered-by');
 
 // Routes START
 const plasmaRouter = require("./routes/plasma");
+const supplierRouter = require("./routes/supplier");
 const hospitalRouter = require("./routes/hospital");
 const oxygenRouter = require("./routes/oxygen");
 const medicineRouter = require("./routes/medicine");
@@ -86,12 +87,13 @@ express.static(join(__dirname, "public"));
 app.get('/', (req, res) => {
 	return res.send("Kaam kar raha hai");
 });
+app.use("supplier", supplierRouter);
 app.use('plasma', plasmaRouter);
 app.use('hospital', hospitalRouter);
 app.use('oxygen', oxygenRouter);
 app.use('medicine', medicineRouter);
 
-// catch 404 and forward to error handler
+  // catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));
 
 // error handler
@@ -104,5 +106,4 @@ app.use((err, req, res, next) => {
 	// render the error page
 	res.sendStatus(err.status || 500);
 });
-
 module.exports = app;
