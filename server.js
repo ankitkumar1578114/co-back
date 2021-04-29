@@ -38,11 +38,11 @@
  }
  
  function onListening () {
-     const addr = server.address();
-     const bind = typeof addr === "string"
-         ? "pipe " + addr
-         : "port " + addr.port;
-     console.log("Listening on " + bind);
+    //  const addr = server.address();
+    //  const bind = typeof addr === "string"
+    //      ? "pipe " + addr
+    //      : "port " + addr.port;
+     console.log("Listening on " + PORT);
  }
  
  function exitHandler(sig) {
@@ -57,5 +57,5 @@
  process.on("SIGINT", exitHandler);
  
  app.on("error", onError);
- app.listen(PORT, onListening);
+ const server = app.listen(PORT, onListening);
  

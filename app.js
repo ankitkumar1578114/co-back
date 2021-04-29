@@ -16,15 +16,9 @@ const oxygenRouter = require("./routes/oxygen");
 const medicineRouter = require("./routes/medicine");
 // Routes END
 
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/";
 const mongoose = require("mongoose");
 // the default database options for each new connection
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/";
-const dbOptions = {
-	useNewUrlParser: true,
-	useCreateIndex: true,
-	useUnifiedTopology: true,
-	retryWrites: true,
-};
 const conn = mongoose.connection;
 mongoose.connect(
 	MONGODB_URI,
@@ -32,6 +26,8 @@ mongoose.connect(
 		useNewUrlParser: true,
 		useCreateIndex: true,
 		useUnifiedTopology: true,
+		dbName: "coback",
+		retryWrites: true
 	}
 ).catch(err => {
 		if (MONGODB_URI !== "mongodb://localhost/") {
@@ -82,13 +78,12 @@ app.use(morgan("dev"));
 // 	// httpOnly: true,
 // 	// secure: true,
 // }
-app.use(cparser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 express.static(join(__dirname, "public"));
 
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
 	return res.send("Kaam kar raha hai");
 });
 app.use('plasma', plasmaRouter);
