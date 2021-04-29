@@ -3,7 +3,7 @@
 /**
  * @file_brief -> This file specifies error handlers, and mounts the express app on a node.js server (exported from ${REPO_ROOT}/app.js)
  */
- const app = require("../app");
+ const app = require("./app");
  const http = require("http");
  const { exit } = require("process");
  

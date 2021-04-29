@@ -13,6 +13,8 @@ const app = express();
 // Routes START
 const plasmaRouter = require("./routes/plasma");
 const hospitalRouter = require("./routes/hospital");
+const oxygenRouter = require("./routes/oxygen");
+const medicineRouter = require("./routes/medicine");
 // Routes END
 
 const mongoose = require("mongoose");
@@ -89,8 +91,11 @@ express.static(join(__dirname, "public"));
 
 app.use('/', (req, res) => {
 	return res.send("Kaam kar raha hai");
-})
+});
 app.use('plasma', plasmaRouter);
+app.use('hospital', hospitalRouter);
+app.use('oxygen', oxygenRouter);
+app.use('medicine', medicineRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => next(createError(404)));
