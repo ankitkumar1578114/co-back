@@ -1,12 +1,12 @@
-const { Schema, Model } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const costomerSchema = new Schema({
-	nameOfSupplier: {
+const customerSchema = new Schema({
+	nameOfCustomer: {
 		type: String,
 		required: true,
 		trim: true
 	},
-    addressOfSupplier: {
+    addressOfCustomer: {
 		type: String,
 		required: true,
 		trim: true
@@ -23,4 +23,4 @@ const costomerSchema = new Schema({
     
 });
 
-module.exports = Model("costomer", supplierSchema);
+module.exports = model("customer", customerSchema);
