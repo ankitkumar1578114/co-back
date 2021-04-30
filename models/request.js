@@ -20,7 +20,7 @@ const requestSchema = new Schema({
 requestSchema.pre('validate', function(next) {
     // checking if contact is valid
 
-    if( ! /[\+91]? *\d{10}/.test(this.contact) ) {
+    if( ! /[+91]? *\d{10}/.test(this.contact) ) {
         console.error(`${this.contact} doesn't seem to be a number`);
         throw Error(400);   //  returning the status code, that should be returned (INVALID INPUT)
     }

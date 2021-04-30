@@ -2,7 +2,7 @@ const hospital = require("../../models/hospital");
 
 const router = require("express").Router();
 
-router.get("/list/:city", (_, res) => {
+router.get("/list/:city", (req, res) => {
     const city = req.params.city;
 
     hospital.find({city: city}).lean().exec()
@@ -42,7 +42,7 @@ router.post("/new", (req, res) => {
     }
 
     hospital.create(hospital_details)
-                .then(doc => {
+                .then(_doc => {
                     console.log("Created entry for hospital: ", hospital_details);
 
                     return res.sendStatus(204);

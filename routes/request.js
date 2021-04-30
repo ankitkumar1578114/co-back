@@ -18,7 +18,7 @@ router.delete('/remove/:req_id', (req, res) => {
     const id = req.params.req_id;
 
     requestModel.findByIdAndDelete(id)
-        .then(doc => {
+        .then(_doc => {
             console.log(`Deleted request id: ${id} successfully`);
             return res.sendStatus(204);
         })
@@ -35,7 +35,16 @@ router.post('/new', (req, res) => {
         requesterName: req.body.name
     };
 
-    throw Error("TODO");
+    requestModel.create(new_request)
+                    .then(_doc => {
+                        console.log("Created request");
+
+                        return res.sendStatus(204);
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        return res.sendStatus(500);
+                    })
 })
 
 module.exports = router;

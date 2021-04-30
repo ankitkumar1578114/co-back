@@ -30,7 +30,7 @@ mongoose.connect(
 		dbName: "coback",
 		retryWrites: true
 	}
-).catch(err => {
+).catch(_err => {
 		if (MONGODB_URI !== "mongodb://localhost/") {
 			console.log("Unable to connect to MONGODB cluster... Trying to connect to localhost");
 
@@ -94,10 +94,10 @@ app.use('/oxygen', oxygenRouter);
 app.use('/medicine', medicineRouter);
 
   // catch 404 and forward to error handler
-app.use((req, res, next) => next(createError(404)));
+app.use((_req, _res, next) => next(createError(404)));
 
 // error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
 	// set locals, only providing error in development
 	res.locals.message = err.code + " - " + err.message;
 	res.locals.error = req.app.get("env") !== "production" ? err : {};

@@ -42,7 +42,7 @@ router.post("/new", (req, res) => {
     }
 
     medicine.create(medicine_details)
-                .then(doc => {
+                .then(_doc => {
                     console.log("Created entry for medicine: ", medicine_details);
 
                     return res.sendStatus(204);
